@@ -14,14 +14,19 @@ The other two sketches were used for developing the first sketch.
     which disables cert validation
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
-* Note: these sketches also print to the second serial port on the MKR GSM 1400 board, pins 13, 14 and the ground
-* Note: the GsmWebClient_hourly_SSL_Post sketch posts uptime and the IMEI string.
+### Notes
+* These sketches also print to the second serial port on the MKR GSM 1400 board, pins 13, 14 and the ground
+* The GsmWebClient_hourly_SSL_Post sketch posts uptime and the IMEI string.
+* The GsmWebClient_hourly_SSL_Post is sending data to a REST API written using the [Django REST Framework](https://www.django-rest-framework.org/).
+* The REST API uses the IMEI string of the SIM, in place of Token Authentication, since only the REST API "knows" the IMEI.
+This string is verified, in place of Token Authentication, otherwise a Validation Error is raised.
 
 ### Device details
-* Board: Arduino MKR GSM 1400
+* Board: [Arduino MKR GSM 1400](https://store-usa.arduino.cc/products/arduino-mkr-gsm-1400)
+* Antenna: Came with the [ARDUINO SIM - MKR GSM 1400 Cellular Kit](https://store-usa.arduino.cc/collections/kits/products/arduino-sim-mkr-gsm-1400-cellular-kit)  It's probably the [Dipole Pentaband Waterproof Antenna](https://store-usa.arduino.cc/products/dipole-pentaband-waterproof-antenna?selectedStore=us)
 * Power:
     * The USB port on the PC works
-    * A Raspberry Pi power supply (either 5.1 Volts/3.1 Amps or 5.1 volts/2.1 amps)
+    * A Raspberry Pi power supply (either 5.1 Volts/3.5 Amps or 5.0 volts/2.5 amps)
     * The USB charger, [for example: Anker Quick Charge 3.0 39W Dual USB Wall Charger](https://www.amazon.com/gp/product/B01IUSYF8G/),
     that was used appeared to restart the device after the POST
     as if it's powering off, then on again: *do not use*. 
