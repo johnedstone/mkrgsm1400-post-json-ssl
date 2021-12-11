@@ -41,7 +41,7 @@ The workaround is to disable cert validation (see reference):
 126       MODEM.sendf("AT+USECPRF=0");
 ```
 
-* The hack below has been added to the sketch GsmWebClient_hourly_SSL
+* This hack below has been added to the sketch GsmWebClient_hourly_SSL
 The issue was first noted in the GsmSSLWebClient example 
 which fails to reach the end of the code, i.e. `disconnecting`. The
 reason for hanging is that in the example sketch !client.connected() is
