@@ -47,7 +47,7 @@ which fails to reach the end of the code, i.e. `disconnecting`. The
 reason for hanging is that in the example sketch `client.connected()`
 never returns false.  There appears to be unread data, i.e. one last byte, that is not
 being read. *This hack is not needed for GsmWebClient_hourly_SSL_POST sketch
-because the data is read differently (how ever the workaround in the MKRGSM
+because the data is read differently (however the workaround in the MKRGSM
 library is still needed*
 ```
 128   // SSL hack: if there is just one byte left, force a stop
