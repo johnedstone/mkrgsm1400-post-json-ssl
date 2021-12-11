@@ -23,7 +23,7 @@ This string is verified, in place of Token Authentication, otherwise a Validatio
 
 ### Device details
 * Board: [Arduino MKR GSM 1400](https://store-usa.arduino.cc/products/arduino-mkr-gsm-1400)
-* Antenna: Came with the [ARDUINO SIM - MKR GSM 1400 Cellular Kit](https://store-usa.arduino.cc/collections/kits/products/arduino-sim-mkr-gsm-1400-cellular-kit)  It's probably the [Dipole Pentaband Waterproof Antenna](https://store-usa.arduino.cc/products/dipole-pentaband-waterproof-antenna?selectedStore=us)
+* Antenna: Came with the [ARDUINO SIM - MKR GSM 1400 Cellular Kit](https://store-usa.arduino.cc/collections/kits/products/arduino-sim-mkr-gsm-1400-cellular-kit).  It's probably the [Dipole Pentaband Waterproof Antenna](https://store-usa.arduino.cc/products/dipole-pentaband-waterproof-antenna?selectedStore=us)
 * Power:
     * The USB port on the PC works
     * A Raspberry Pi power supply (either 5.1 Volts/3.5 Amps or 5.0 volts/2.5 amps)
