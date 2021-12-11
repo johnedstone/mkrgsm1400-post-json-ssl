@@ -67,10 +67,10 @@ Here are some references that were helpful along the way!
 * [Pre-flight checklist](https://www.tigoe.com/pcomp/code/arduinowiring/1337/)
 * [Background on writing json](https://forum.arduino.cc/t/tomcat-arduino-gsm-shield-post-json/387640)
 * [JsonHttpClient.ino](https://arduinojson.org/v6/example/http-client/)
-* [ArduinoJson 5->6 changes](https://arduinojson.org/news/2018/06/07/version-6-0-0/)
+* [ArduinoJson 6 release notes](https://arduinojson.org/news/2018/06/07/version-6-0-0/)
 * [JsonGeneratorExample.ino](https://arduinojson.org/v6/example/generator/)
 * [The best way to use ArduinoJson](https://arduinojson.org/v6/how-to/reuse-a-json-document/)
-* [How to send json data](https://arduinojson.org/v6/example/http-server/ (for sending json)
+* [How to send json data](https://arduinojson.org/v6/example/http-server/)
 * [Lots of examples, but missing sending json data](https://arduinogetstarted.com/tutorials/arduino-http-request)
 
 <!---
