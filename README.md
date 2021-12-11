@@ -41,13 +41,12 @@ The workaround is to disable cert validation (see reference):
 126       MODEM.sendf("AT+USECPRF=0");
 ```
 
-* This hack below has been added to the sketch GsmWebClient_hourly_SSL
+* This hack below has been added to the sketch GsmWebClient_hourly_SSL.
 The issue was first noted in the GsmSSLWebClient example 
 which fails to reach the end of the code, i.e. `disconnecting`. The
-reason for hanging is that in the example sketch !client.connected() is
-never true.  That is, the client never returns false when `client.connected()
-is called.  There appears to be unread data, i.e. one last byte, that is not
-being read. *This hack is not needed for GsmWebClient_hourly_SSL_POST
+reason for hanging is that in the example sketch `client.connected()`
+never returns false.  There appears to be unread data, i.e. one last byte, that is not
+being read. *This hack is not needed for GsmWebClient_hourly_SSL_POST sketch
 because the data is read differently (how ever the workaround in the MKRGSM
 library is still needed*
 ```
