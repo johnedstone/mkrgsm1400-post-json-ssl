@@ -38,7 +38,7 @@ This string is verified, in place of Token Authentication, otherwise a Validatio
 There appears to be a bug in the MKRGSM library that prevents
 the sketch from connecting (consistently).
 Even the example provided by the library fails to connect.
-The workaround is to disable cert validation (see reference):
+The workaround is to disable cert validation (see reference), lines 125-126 below:
 ```
 #file: libraries/MKRGSM/src/GSMClient.cpp
 124     case CLIENT_STATE_MANAGE_SSL_PROFILE: {
