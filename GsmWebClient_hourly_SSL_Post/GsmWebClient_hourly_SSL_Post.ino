@@ -191,8 +191,8 @@ void makeWebRequest() {
 
   } else {
     // if you didn't get a connection to the server:
-    Serial.println(F("connection failed"));
-    Serial1.println(F("connection failed"));
+    Serial.println(F("connection failed - check Readme: has cert validation been disabled?"));
+    Serial1.println(F("connection failed - check Readme: has cert validation been disabled?"));
   }
 
   Serial.println(F("Blinking  5 sec ... web request finished"));
@@ -222,8 +222,8 @@ void setup() {
   */
   delay(2000);
 
-  Serial.println(F("Starting Arduino web client: GsmWebClient_hourly_SSL_POST."));
-  Serial1.println(F("Starting Arduino web client: GsmWebClient_hourly_SSL_POST."));
+  Serial.println(F("Sketch: GsmWebClient_hourly_SSL_POST."));
+  Serial1.println(F("Sketch: GsmWebClient_hourly_SSL_POST."));
 }
 
 void loop() {
