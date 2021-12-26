@@ -14,6 +14,7 @@ The other two sketches were used for developing the first sketch.
     which disables cert validation
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
+
 ### Notes
 * These sketches also print to the second serial port on the MKR GSM 1400 board, pins 13, 14 and the ground
 * The GsmWebClient_hourly_SSL_Post sketch posts uptime and the IMEI string.
@@ -66,6 +67,8 @@ library is still needed*
 136     client.stop();
 137   }
 ```
+
+* [Submitted as bug on 26-Dec-2021](https://github.com/arduino-libraries/MKRGSM/issues/147)
 
 ### Notes on arudino-ide on raspberrypi 3+, version 1.8.19
 * For linux arm 32bit needed to `sudo apt install libfl2`
