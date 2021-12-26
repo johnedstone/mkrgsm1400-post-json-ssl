@@ -67,6 +67,9 @@ library is still needed*
 137   }
 ```
 
+### Notes on arudino-ide on raspberrypi 3+, version 1.8.19
+* For linux arm 32bit needed to `sudo apt install libfl2`
+
 ### References
 Here are some references that were helpful along the way!
 * [Pre-flight checklist](https://www.tigoe.com/pcomp/code/arduinowiring/1337/)
