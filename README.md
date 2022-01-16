@@ -5,15 +5,21 @@ The other two sketches were used for developing the first sketch.
 
 ### List of projects
 * GsmWebClient_hourly: something simple, not a POST, not SSL, send a GET request every hour.
+    * Board: Arudino MKR GSM 1400
 * GsmWebClient_hourly_SSL: something simple, not a POST, using SSL, sending a GET request every hour.
+    * Board: Arudino MKR GSM 1400
     * This sketch uses the SSL work-around described below in the MKRGSM library
     which disables cert validation
     * This sketch also uses the hack described below, in the sketch, to force the client to stop. 
 * GsmWebClient_hourly_SSL_POST (currently deployed): sending JSON data with an HTTP POST using SSL.
+    * Board: Arudino MKR GSM 1400
     * This sketch uses the SSL work-around described below in the MKRGSM library
     which disables cert validation
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
+* NBWebClient_hourly_SSL_Post: similar to GsmWebClient_hourly_SSL_POST
+    * Board: Arudino MKR NB 1500
+    * This sketch disables SSL cert verification until modem firmware is updated or Root certs are added to the library.
 
 ### Notes
 * These sketches also print to the second serial port on the MKR GSM 1400 board, pins 13, 14 and the ground
