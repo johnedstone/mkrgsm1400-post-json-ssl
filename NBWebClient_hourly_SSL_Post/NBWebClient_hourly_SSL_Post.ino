@@ -17,8 +17,8 @@
  *   Third: while waiting on modem firmware updating and/or getting Root certs loaded,
  *     disable cert validation:
  *     See this file: libraries/MKRNB-master/src/NBClient.cpp
- *      125 //MODEM.send("AT+USECPRF=0,0,1");
- *      126  MODEM.sendf("AT+USECPRF=0");
+ *       125 //MODEM.send("AT+USECPRF=0,0,1");
+ *       126  MODEM.sendf("AT+USECPRF=0");
  */
 
 #include <Arduino.h>
