@@ -4,14 +4,21 @@
  *
  * Based on: 
  *  - libraries/MKRNB/examples/NBSSLWebClient
- *  - GSMWebClient_hourly_SSL_Post (in this repository)
+ *  - GSMWebClient_hourly_SSL_Post (https://github.com/johnedstone/mkrgsm1400-post-json-ssl)
  *
- * One library modification needed until certs
- *  get installed and/or modem firmware is update
- *  in order to disable cert validation
- *  See this file: library/MKRNB/src/NBClient.cpp
- *   125 //MODEM.send("AT+USECPRF=0,0,1");
- *   126  MODEM.sendf("AT+USECPRF=0");
+ * Several library modification needed
+ *  First: remove libraries/MKRNB and
+ *    replace with libraries/MKRNB-master from https://github.com/arduino-libraries/MKRNB
+ *  Second: update libraries/MKRNB-master/src/Modem.cpp as
+ *    as noted at https://forum.arduino.cc/t/mkr-1500-nb-hangs-on-nbaccess-begin/636736
+ *    proposed by hakondahle.
+ *    Namely update int ModemClass::begin(bool restart) and
+ *                  void ModemClass::end()
+ *  Third: while waiting on modem firmware updating and/or getting Root certs loaded,
+ *    disable cert validation:
+ *    See this file: libraries/MKRNB-master/src/NBClient.cpp
+ *     125 //MODEM.send("AT+USECPRF=0,0,1");
+ *     126  MODEM.sendf("AT+USECPRF=0");
  */
 
 #include <Arduino.h>
@@ -28,8 +35,13 @@ int port = 443;
 int sleeping_ms = 3561000;
 // int sleeping_ms = 180000; // 3 min
 
-char server[] = "arduino.johnedstone.net";
-char path[] = "/api/v1/reports/";
+char server[] = "your.rest.api";
+char path[] = "/your/endpoint/to/post/";
+
+NBSSLClient client;
+GPRS gprs;
+NB nbAccess;
+NBModem modemTest;
 
 void setup() {
   Serial.begin(9600);
@@ -50,11 +62,6 @@ void loop() {
 }
 
 void postData() {
-
-  NBSSLClient client;
-  GPRS gprs;
-  NB nbAccess;
-  NBModem modemTest;
 
   Serial.println(F("Starting Arduino SSL web client."));
   // connection state
