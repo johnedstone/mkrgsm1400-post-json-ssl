@@ -19,6 +19,19 @@
  *     See this file: libraries/MKRNB-master/src/NBClient.cpp
  *       125 //MODEM.send("AT+USECPRF=0,0,1");
  *       126  MODEM.sendf("AT+USECPRF=0");
+ *
+ * Test: previously this halted after 9x 1 hour iterations, and again 9x the second attempt
+ *       changing to 3min to see if this can repeat
+ *       Result: halted after 9 iterations
+ *
+ * Problem: This code stops after 9x iterations whether it's 1 hour or 3 min
+ *          Returns status but then fails to send the next command: AT+USOCL
+ *          which is close socket. Argggg! : (
+ *          This is what should happen, but the last two lines never appear
+ *              +UUSORD: 0,195
+ *              Status: HTTP/1.1 201 Created
+ *              AT+USOCL=0
+ *              OK
  */
 
 #include <Arduino.h>
@@ -33,14 +46,15 @@ int port = 443;
 
 // Note: 3600000 is 1 hour.  Currently sleeping 1 hour-27 sec
 int sleeping_ms = 3561000;
-// int sleeping_ms = 180000; // 3 min
+//int sleeping_ms = 180000; // 3 min
 
 char server[] = "your.rest.api";
 char path[] = "/your/endpoint/to/post/";
 
+
 NBSSLClient client;
 GPRS gprs;
-NB nbAccess;
+NB nbAccess(true);
 NBModem modemTest;
 
 void setup() {
@@ -70,14 +84,17 @@ void postData() {
   // After starting the modem with NB.begin()
   // attach to the GPRS network with the APN, login and password
   while (!connected) {
+    Serial.print(F("one"));
     if ((nbAccess.begin(PINNUMBER) == NB_READY) &&
         (gprs.attachGPRS() == GPRS_READY)) {
       connected = true;
+      Serial.print(F("two"));
     } else {
       Serial.println(F("Modem/GPRS not connected"));
       delay(1000);
     }
   }
+  Serial.print(F("three"));
 
   // https://arduinojson.org/v6/example/http-server/ (for sending json)
   // Allocate a temporary JsonDocument
