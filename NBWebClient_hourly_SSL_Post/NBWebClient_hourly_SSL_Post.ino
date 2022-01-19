@@ -9,10 +9,10 @@
  * Several library modification needed
  *   First: remove libraries/MKRNB and
  *     replace with libraries/MKRNB-master from https://github.com/arduino-libraries/MKRNB
- *   Second: update libraries/MKRNB-master/src/Modem.cpp as
+ *   Second: update libraries/MKRNB-master/src/Modem.cpp and
  *     as noted at https://forum.arduino.cc/t/mkr-1500-nb-hangs-on-nbaccess-begin/636736
- *     proposed by hakondahle.
- *     Namely update int ModemClass::begin(bool restart) and
+ *     proposed by hakondahle,
+ *     update int ModemClass::begin(bool restart) and
  *                   void ModemClass::end()
  *   Third: while waiting on modem firmware updating and/or getting Root certs loaded,
  *     disable cert validation:
@@ -20,18 +20,39 @@
  *       125 //MODEM.send("AT+USECPRF=0,0,1");
  *       126  MODEM.sendf("AT+USECPRF=0");
  *
- * Test: previously this halted after 9x 1 hour iterations, and again 9x the second attempt
- *       changing to 3min to see if this can repeat
- *       Result: halted after 9 iterations
+ * Previous problems have been (which may now have been fixed):
+ *   Test: previously this halted after 9x 1 hour iterations, and again 9x the second attempt
+ *         changing to 3min to see if this can repeat
+ *         Result: halted after 9 iterations
  *
- * Problem: This code stops after 9x iterations whether it's 1 hour or 3 min
- *          Returns status but then fails to send the next command: AT+USOCL
- *          which is close socket. Argggg! : (
- *          This is what should happen, but the last two lines never appear
- *              +UUSORD: 0,195
- *              Status: HTTP/1.1 201 Created
- *              AT+USOCL=0
- *              OK
+ *   Problem: This code stops after 9x iterations whether it's 1 hour or 3 min
+ *            Returns status but then fails to send the next command: AT+USOCL
+ *            which is close socket. Argggg! : (
+ *            This is what should happen, but the last two lines never appear
+ *                +UUSORD: 0,195
+ *                Status: HTTP/1.1 201 Created
+ *                AT+USOCL=0
+ *                OK
+ * Changes that perhaps is enabling this to work are
+ *   -- not sure
+ *   -- carefully placed client stop, as if it weren't disconnected
+ *   -- put initiating classes back inside the loop, instead of global to prevent corruption - a guesss
+ * Worked:
+ *    Powered by laptop USB
+ *    Hard power off/on, i.e. not just uploaded sketch
+ *    Adding modem.begin()
+ *    Carefully placing client.stop()
+ *    10sec, 20 iterations ok
+ * Worked:
+ *    Powered by laptop USB
+ *    Hard power off/on, i.e. not just uploaded sketch
+ *    3 min iterations
+ *    60x no problems
+ * Worked:
+ *    Powered by laptop USB
+ *    Hard power off/on, i.e. not just uploaded sketch
+ *    30 min iterations
+ *    22x still running
  */
 
 #include <Arduino.h>
@@ -45,17 +66,13 @@ const char PINNUMBER[]     = SECRET_PINNUMBER;
 int port = 443;
 
 // Note: 3600000 is 1 hour.  Currently sleeping 1 hour-27 sec
-int sleeping_ms = 3561000;
+//int sleeping_ms = 3561000;
 //int sleeping_ms = 180000; // 3 min
+int sleeping_ms = 1800000; // 30 min
 
 char server[] = "your.rest.api";
 char path[] = "/your/endpoint/to/post/";
 
-
-NBSSLClient client;
-GPRS gprs;
-NB nbAccess(true);
-NBModem modemTest;
 
 void setup() {
   Serial.begin(9600);
@@ -76,25 +93,31 @@ void loop() {
 }
 
 void postData() {
+  NBSSLClient client;
+  GPRS gprs;
+  NB nbAccess;
+  NBModem modemTest;
 
-  Serial.println(F("Starting Arduino SSL web client."));
+  Serial.println(F("Starting NB/GPRS/NBSSLClient."));
   // connection state
   boolean connected = false;
 
-  // After starting the modem with NB.begin()
-  // attach to the GPRS network with the APN, login and password
   while (!connected) {
-    Serial.print(F("one"));
+    Serial.println(F("one"));
     if ((nbAccess.begin(PINNUMBER) == NB_READY) &&
         (gprs.attachGPRS() == GPRS_READY)) {
       connected = true;
-      Serial.print(F("two"));
+      Serial.println(F("two"));
     } else {
-      Serial.println(F("Modem/GPRS not connected"));
+      // Untested: this is a "guess" as to what to do if we get here
+      Serial.println(F("########## Modem/GPRS not connected: restarting modem ##############"));
+      Serial.println(F("##########                   three                    ##############"));
+      modemTest.begin();
+      Serial.println(F("##########             Modem restarted!               ##############"));
       delay(1000);
     }
   }
-  Serial.print(F("three"));
+  Serial.println(F("four"));
 
   // https://arduinojson.org/v6/example/http-server/ (for sending json)
   // Allocate a temporary JsonDocument
@@ -136,24 +159,22 @@ void postData() {
     char status[96] = {0};
     client.readBytesUntil('\r', status, sizeof(status));
 
+    // Question: where should this stop be?
+    client.stop();
+
     if (strcmp(status, "HTTP/1.1 201 Created") != 0) {
       Serial.print(F("Unexpected response: "));
       Serial.println(status);
-      Serial1.print(F("Unexpected response: "));
-      Serial1.println(status);
-      client.stop();
       return;
     } else {
       Serial.print(F("Status: "));
       Serial.println(status);
-      Serial1.print(F("Status: "));
-      Serial1.println(status);
     }
-    client.stop();
 
   } else {
     // if you didn't get a connection to the server:
     Serial.println(F("REST API connection failed"));
+    client.stop();
   }
 
   serializeJsonPretty(doc, Serial);
