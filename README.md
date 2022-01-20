@@ -18,7 +18,7 @@ The other two sketches were used for developing the first sketch.
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
 * NBWebClient_hourly_SSL_Post:
-    * See [MKR-NB-1500-sketches github/johnedstone repo](https://github.com/johnedstone/MKR-NB-1500-sketches)
+    * See [MKR-NB-1500-sketches github.com/johnedstone repository](https://github.com/johnedstone/MKR-NB-1500-sketches)
 
 ### Notes
 * These sketches also print to the second serial port on the MKR GSM 1400 board, pins 13, 14 and the ground
