@@ -1,8 +1,12 @@
 /*
  * Sketch: NBWebClient_hourly_SSL_Post
- * MKR NB 1500 board
+ * Device: MKR NB 1500
+ * SIM: hologram
+ * Firmware:
  *
- * Based on: 
+ * Purpose: POST JSON over SSL to a REST API server
+ *
+ * Development based on these sketches: 
  *  - libraries/MKRNB/examples/NBSSLWebClient
  *  - GSMWebClient_hourly_SSL_Post (https://github.com/johnedstone/mkrgsm1400-post-json-ssl)
  *
@@ -14,7 +18,7 @@
  *     proposed by hakondahle,
  *     update int ModemClass::begin(bool restart) and
  *                   void ModemClass::end()
- *   Third: while waiting on modem firmware updating and/or getting Root certs loaded,
+ *   Third (optionally): while waiting on modem firmware updating and/or getting Root certs loaded,
  *     disable cert validation:
  *     See this file: libraries/MKRNB-master/src/NBClient.cpp
  *       125 //MODEM.send("AT+USECPRF=0,0,1");
@@ -52,7 +56,13 @@
  *    Powered by laptop USB
  *    Hard power off/on, i.e. not just uploaded sketch
  *    30 min iterations
- *    22x still running
+ *    44x no problems
+ * Next:
+ *    Powered with 5V 2.5A Pi Power Supply from Canakit
+ *    Hard power off/on, i.e. not just uploaded sketch
+ *    60 min iterations
+ *    Install Let's Encrypt SSL Root Cert
+ *
  */
 
 #include <Arduino.h>
