@@ -17,10 +17,8 @@ The other two sketches were used for developing the first sketch.
     which disables cert validation
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
-* NBWebClient_hourly_SSL_Post: similar to GsmWebClient_hourly_SSL_POST
-    * Board: Arudino MKR NB 1500
-    * Three library modifications made. See the header of `NBWebCliet_hourly_SSL_Post.ino`
-    * Currently .... up now 22x, 9 hours, 30 min delay
+* NBWebClient_hourly_SSL_Post:
+    * See [MKR-NB-1500-sketches github/johnedstone repo](https://github.com/johnedstone/MKR-NB-1500-sketches)
 
 ### Notes
 * These sketches also print to the second serial port on the MKR GSM 1400 board, pins 13, 14 and the ground
