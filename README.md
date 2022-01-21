@@ -17,6 +17,8 @@ The other two sketches were used for developing the first sketch.
     which disables cert validation
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
+* GsmWebClient_hourly_SSL_POST_with_Validation_Not: Probably __better/cleaner__ than GsmWebClient_hourly_SSL_POST
+    * Developed while trying to implement [this possilbe way to add SSL certs - but "backed out, unsuccessful"](https://github.com/arduino-libraries/MKRGSM/issues/23)
 * NBWebClient_hourly_SSL_Post:
     * See [MKR-NB-1500-sketches github.com/johnedstone repository](https://github.com/johnedstone/MKR-NB-1500-sketches)
 
