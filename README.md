@@ -11,13 +11,13 @@ The other two sketches were used for developing the first sketch.
     * This sketch uses the SSL work-around described below in the MKRGSM library
     which disables cert validation
     * This sketch also uses the hack described below, in the sketch, to force the client to stop. 
-* GsmWebClient_hourly_SSL_POST (__currently deployed__): sending JSON data with an HTTP POST using SSL.
+* GsmWebClient_hourly_SSL_POST (___currently deployed___): sending JSON data with an HTTP POST using SSL.
     * Board: Arudino MKR GSM 1400
     * This sketch uses the SSL work-around described below in the MKRGSM library
     which disables cert validation
     * This sketch **does not** use the hack described below for forcing the client to stop
     because the data is read differently.
-* GsmWebClient_hourly_SSL_POST_with_Validation_Not: Probably __better/cleaner__ than GsmWebClient_hourly_SSL_POST
+* GsmWebClient_hourly_SSL_POST_with_Validation_Not: Probably ___better/cleaner___ than GsmWebClient_hourly_SSL_POST
     * Developed while trying to implement [this possilbe way to add SSL certs - but "backed out, unsuccessful"](https://github.com/arduino-libraries/MKRGSM/issues/23)
 * NBWebClient_hourly_SSL_Post:
     * See [MKR-NB-1500-sketches github.com/johnedstone repository](https://github.com/johnedstone/MKR-NB-1500-sketches)
