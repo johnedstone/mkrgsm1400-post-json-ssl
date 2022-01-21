@@ -11,7 +11,7 @@ The other two sketches were used for developing the first sketch.
     * This sketch uses the SSL work-around described below in the MKRGSM library
     which disables cert validation
     * This sketch also uses the hack described below, in the sketch, to force the client to stop. 
-* GsmWebClient_hourly_SSL_POST (currently deployed): sending JSON data with an HTTP POST using SSL.
+* GsmWebClient_hourly_SSL_POST (__currently deployed__): sending JSON data with an HTTP POST using SSL.
     * Board: Arudino MKR GSM 1400
     * This sketch uses the SSL work-around described below in the MKRGSM library
     which disables cert validation
