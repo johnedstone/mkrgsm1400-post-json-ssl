@@ -6,7 +6,7 @@
 * For related sketches see
     * [MKR NB 1500](https://github.com/johnedstone/MKR-NB-1500-sketches)
     * [GPy Pycom.io - tbd](./)
-* Commenting out SSL cert validation here:
+* Commented out SSL cert validation in the library as detailed below
 ```
 #file: libraries/MKRGSM/src/GSMClient.cpp
 124     case CLIENT_STATE_MANAGE_SSL_PROFILE: {
