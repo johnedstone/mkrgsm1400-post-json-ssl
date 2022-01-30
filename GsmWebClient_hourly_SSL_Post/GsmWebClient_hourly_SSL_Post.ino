@@ -1,9 +1,8 @@
 /*
  * Sketch:
- * Arduino MKR GSM 1400 
+ * Arduino MKR GSM 1400
  * Antenna
  * SIM: Hologram
- *
 */
 
 #include <Arduino.h>
@@ -16,10 +15,11 @@ const char PINNUMBER[]     = SECRET_PINNUMBER;
 const char GPRS_APN[]      = SECRET_GPRS_APN;
 const char GPRS_LOGIN[]    = SECRET_GPRS_LOGIN;
 const char GPRS_PASSWORD[] = SECRET_GPRS_PASSWORD;
+
 int port = 443;
 
 // Note: 3600000 is 1 hour.  Currently sleeping 1 hour-27 sec
-int sleeping_ms = 3573000;
+int sleeping_ms = 3561000;
 // int sleeping_ms = 180000; // 3 min
 
 char server[] = "your.server.net";
@@ -114,7 +114,8 @@ void makeWebRequest() {
     serializeJsonPretty(doc, client);
 
     // pause waiting for response
-    delay(750);
+    // delay(750);
+    delay(2000);
 
     // https://arduinojson.org/v6/example/http-client/
     // Check HTTP status
