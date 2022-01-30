@@ -1,7 +1,7 @@
 ### Notes
-* Description: Arduino sketch for the MKRGSM1400 Arduino board for posting JSON data with SSL to a REST API
+* Description: Arduino sketch for the MKR GSM 1400 Arduino board for posting JSON data with SSL to a REST API
 * Currently, the most robust sketch (running now for 30d+) is `GsmWebClient_hourly_SSL_Post`
-* For more history, and earlier scripts see [archive/Readme.md](archive/Readme.md)
+* For more history, and earlier scripts see [archive/Readme.md](archive)
 * Can be powered with the PC USB or a 5 volt charger, e.g. Raspberry Pi power supply (either 5.1 Volts/3.5 Amps or 5.0 volts/2.5 amps)
 * For related sketches see
     * [MKR NB 1500](https://github.com/johnedstone/MKR-NB-1500-sketches)
