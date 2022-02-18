@@ -1,6 +1,9 @@
 ### Notes
 * Description: Arduino sketch for the MKR GSM 1400 Arduino board for posting JSON data with SSL to a REST API
-* Currently, the most robust sketch (running now for 30d+) is `GsmWebClient_hourly_SSL_Post`
+* Current two sketchs:
+    * GsmWebClient_hourly_SSL_Post_GPS
+    * GsmWebClient_hourly_SSL_Post_GPS_UTC
+    * 
 * For more history, and earlier scripts see [archive/Readme.md](archive)
 * Can be powered with the PC USB or a 5 volt charger, e.g. Raspberry Pi power supply (either 5.1 Volts/3.5 Amps or 5.0 volts/2.5 amps)
 * For related sketches see
@@ -17,4 +20,3 @@
 
 ### Uptime issues
 * MKR GSM 1400 `GsmWebClient_hourly_SSL_POST`: stopped at `"uptime": "uptime: 49d 16:23:13 or 4292593s",`
-* To do: capture NTP start time for MKR GSM 1400 and report that

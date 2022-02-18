@@ -1,6 +1,7 @@
 ## Description
 The arduino sketch, GsmWebClient_hourly_SSL_Post (*GsmWebClient_hourly_SSL_Post_with_Validation_Not* probably supersedes this now),
-demonstrates how to send JSON data with an HTTP POST request using SSL/TLS.
+demonstrates how to send JSON data with an HTTP POST request using SSL/TLS. Failed at 49+days due to uptime library.
+Replaced with GsmWebClient_hourly_SSL_Post_GPS_UTC sketch
 The other sketches were used for development.
 
 
