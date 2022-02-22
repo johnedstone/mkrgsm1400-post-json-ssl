@@ -1,7 +1,6 @@
 ### Notes
 * Description: Arduino sketch for the MKR GSM 1400 Arduino board for posting JSON data with SSL to a REST API
-* Current two sketchs:
-    * GsmWebClient_hourly_SSL_Post_GPS
+* Currently using
     * GsmWebClient_hourly_SSL_Post_GPS_UTC
     * 
 * For more history, and earlier scripts see [archive/Readme.md](archive)
