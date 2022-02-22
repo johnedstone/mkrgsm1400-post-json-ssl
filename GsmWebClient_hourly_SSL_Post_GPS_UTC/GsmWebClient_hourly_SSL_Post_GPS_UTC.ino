@@ -28,6 +28,7 @@ int sleeping_ms = 3561000;
 char server[] = "your.server.net";
 char path[] = "/your/endpoint/"; // whatever your endpoint might be
 
+
 String IMEI = "";
 int start_time = 0;
 String msg = "Start time (unixtime / utc_datetime): ";
@@ -50,32 +51,33 @@ GPSInfo getGPSInfo() {
       connected = true;
       Serial.print("wait location ... ");
     
-      /*
+      bool gps_available = false;
+      int counter = 0;
       unsigned long startMillis = millis();
-      while (!GPS.available());
-      unsigned long endMillis = millis();
-    
-      Serial.print(endMillis - startMillis);
-      Serial.println(" ms");
-      */
 
-      delay(5000);
-      if (GPS.available()) {
-          // read GPS values
-          /*
-          float latitude   = GPS.latitude();
-          float longitude  = GPS.longitude();
-          float altitude   = GPS.altitude();
-          int   satellites = GPS.satellites();
-          */
+      // this needs to be tested with a GPS shield.
+      // Testing now w/o GPS shield
+      while (!gps_available) {
+        if (GPS.available()) {
+          gps_available = true;
+          unsigned long endMillis = millis();
+          Serial.print(endMillis - startMillis);
+          Serial.println(" ms");
           g.latitude   = GPS.latitude();
           g.longitude  = GPS.longitude();
           g.altitude   = GPS.altitude();
           g.satellites = GPS.satellites();
-      } else {
-        Serial.println(F("GPS is unavailable"));
+        } else {
+          Serial.print(F("Counter: "));
+          Serial.println(counter);
+          counter += 1;
+          if (counter == 10) {
+            gps_available = true;
+            Serial.println(F("GPS is unavailable"));
+          }  
+          delay(1000);
+        }
       }
-    
     } else {
       Serial.println("Failed to initialize GPS!");
     }
@@ -202,6 +204,7 @@ void makeWebRequest(GPSInfo gps_info) {
   doc["latitude"] = gps_info.latitude;
   doc["longitude"] = gps_info.longitude;
   doc["altitude"] = gps_info.altitude;
+  doc["start_time"] = start_time;
 
 
   if (client.connect(server, port)) {
@@ -265,7 +268,7 @@ void setup() {
   Serial.begin(9600);
   delay(2000);
 
-  Serial.println(F("Sketch: GsmWebClient_hourly_SSL_Post_GPS_UTC."));
+  Serial.println(F("Sketch: GsmWebClient_hourly_SSL_Post_GPS_UTC"));
 }
 
 void loop() {
