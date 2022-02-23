@@ -17,4 +17,4 @@
 ```
 
 ### Uptime issues
-* MKR GSM 1400 `GsmWebClient_hourly_SSL_POST`: stopped at `"uptime": "uptime: 49d 16:23:13 or 4292593s",` - see `GsmWebClient_hourly_SSL_Post_GPS_UTC` for the resolution of this issue.
+* MKR GSM 1400 GsmWebClient_hourly_SSL_POST sketch: stopped at `"uptime": "uptime: 49d 16:23:13 or 4292593s".  See GsmWebClient_hourly_SSL_Post_GPS_UTC sketch for the resolution of this issue.
