@@ -3,7 +3,7 @@
  * Arduino MKR GSM 1400
  * Antenna
  * SIM: Hologram
- * Arduino MKR GPS (optional)
+ * Arduino MKR GPS (optional: set gps_timeout = 0 if not using)
  * Based on GsmWebClient_hourly_SSL_Post_GPS
 */
 
@@ -27,6 +27,13 @@ int sleeping_ms = 3561000;
 
 char server[] = "your.server.net";
 char path[] = "/your/endpoint/"; // whatever your endpoint might be
+
+/*
+ * 6000000 is approx 8.5 sec
+ * 90000000 is approx 2 min
+ * Set to 0 if no GPS shield
+ */
+int gps_timeout = 6000000;
 
 String IMEI = "";
 int start_time = 0;
@@ -59,23 +66,22 @@ GPSInfo getGPSInfo() {
           gps_available = true;
           unsigned long endMillis = millis();
           Serial.print(endMillis - startMillis);
-          Serial.println(" ms to get GPS data");
+          Serial.println(F(" ms to get GPS data"));
           g.latitude   = GPS.latitude();
           g.longitude  = GPS.longitude();
           g.altitude   = GPS.altitude();
           g.satellites = GPS.satellites();
         } else {
-          /*
-          Serial.print(F("Counter: "));
-          Serial.println(counter);
-          */
-          counter += 1;
-          // 16296 approx 1 sec
-          // 20000 x 120 = 2 min
-          if (counter == 2400000) {
+          if (counter == gps_timeout) {
             gps_available = true;
             Serial.println(F("GPS is unavailable"));
+            unsigned long endMillis = millis();
+            Serial.print(endMillis - startMillis);
+            Serial.println(F(" ms spent checking for GPS data"));
+            Serial.print(F("Counter: "));
+            Serial.println(counter);
           }  
+          counter += 1;
         }
       }
     } else {
