@@ -54,8 +54,6 @@ GPSInfo getGPSInfo() {
       int counter = 0;
       unsigned long startMillis = millis();
 
-      // this needs to be tested with a GPS shield.
-      // Testing now w/o GPS shield
       while (!gps_available) {
         if (GPS.available()) {
           gps_available = true;
