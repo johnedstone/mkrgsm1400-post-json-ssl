@@ -33,7 +33,7 @@ char path[] = "/your/endpoint/"; // whatever your endpoint might be
  * 90000000 is approx 2 min
  * Set to 0 if no GPS shield
  */
-int gps_timeout = 6000000;
+int gps_timeout = 90000000;
 
 String IMEI = "";
 int start_time = 0;
