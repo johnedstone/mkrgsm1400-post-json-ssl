@@ -15,7 +15,6 @@
 125       // MODEM.sendf("AT+USECPRF=0,0,%d",_sslprofile);
 126       MODEM.sendf("AT+USECPRF=0");
 ```
-* Perhaps equal to, or better than the sketch `GsmWebClient_hourly_SSL_Post`, will be [`archive/GsmWebClient_hourly_SSL_Post_with_Validation_Not`](archive), which has been running for 7d+
 
 ### Uptime issues
 * MKR GSM 1400 `GsmWebClient_hourly_SSL_POST`: stopped at `"uptime": "uptime: 49d 16:23:13 or 4292593s",` - see `GsmWebClient_hourly_SSL_Post_GPS_UTC` for the resolution of this issue.

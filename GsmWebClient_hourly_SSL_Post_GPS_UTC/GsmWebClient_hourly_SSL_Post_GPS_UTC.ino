@@ -28,7 +28,6 @@ int sleeping_ms = 3561000;
 char server[] = "your.server.net";
 char path[] = "/your/endpoint/"; // whatever your endpoint might be
 
-
 String IMEI = "";
 int start_time = 0;
 String msg = "Start time (unixtime / utc_datetime): ";
@@ -62,20 +61,23 @@ GPSInfo getGPSInfo() {
           gps_available = true;
           unsigned long endMillis = millis();
           Serial.print(endMillis - startMillis);
-          Serial.println(" ms");
+          Serial.println(" ms to get GPS data");
           g.latitude   = GPS.latitude();
           g.longitude  = GPS.longitude();
           g.altitude   = GPS.altitude();
           g.satellites = GPS.satellites();
         } else {
+          /*
           Serial.print(F("Counter: "));
           Serial.println(counter);
+          */
           counter += 1;
-          if (counter == 10) {
+          // 16296 approx 1 sec
+          // 20000 x 120 = 2 min
+          if (counter == 2400000) {
             gps_available = true;
             Serial.println(F("GPS is unavailable"));
           }  
-          delay(1000);
         }
       }
     } else {
