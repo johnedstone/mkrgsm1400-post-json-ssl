@@ -7,7 +7,7 @@
 * Can be powered with the PC USB or a 5 volt charger, e.g. Raspberry Pi power supply (either 5.1 Volts/3.5 Amps or 5.0 volts/2.5 amps)
 * For related sketches see
     * [MKR NB 1500](https://github.com/johnedstone/MKR-NB-1500-sketches)
-    * [GPy Pycom.io - tbd](./)
+    * [GPy Pycom.io - tbd](https://github.com/johnedstone/pycom-gpy)
 * Commented out SSL cert validation in the library as detailed below
 ```
 #file: libraries/MKRGSM/src/GSMClient.cpp
