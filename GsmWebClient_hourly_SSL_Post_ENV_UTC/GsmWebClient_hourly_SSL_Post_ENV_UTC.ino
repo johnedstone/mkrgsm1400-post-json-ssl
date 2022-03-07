@@ -1,10 +1,10 @@
 /*
- * Sketch: GsmWebClient_hourly_SSL_Post_GPS_UTC
+ * Sketch: GsmWebClient_hourly_SSL_Post_Env_UTC
  * Arduino MKR GSM 1400
  * Antenna
  * SIM: Hologram
  * Arduino MKR GPS (optional: set gps_timeout = 0 if not using)
- * Based on GsmWebClient_hourly_SSL_Post_GPS
+ * Based on GsmWebClient_hourly_SSL_Post_GPS_UTC
 */
 
 #include <Arduino.h>
@@ -32,7 +32,7 @@ int sleeping_ms = 3561000;
  * 90000000 is approx 2 min
  * Set to 0 if no GPS shield
  */
-int gps_timeout = 90000000;
+int gps_timeout = 0;
 
 String IMEI = "";
 int start_time = 0;
@@ -273,7 +273,7 @@ void setup() {
   Serial.begin(9600);
   delay(2000);
 
-  Serial.println(F("Sketch: GsmWebClient_hourly_SSL_Post_GPS_UTC"));
+  Serial.println(F("Sketch: GsmWebClient_hourly_SSL_Post_ENV_UTC"));
 }
 
 void loop() {
