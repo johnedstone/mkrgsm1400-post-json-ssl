@@ -2,3 +2,5 @@
 #define SECRET_GPRS_APN      "hologram" // replace your GPRS APN
 #define SECRET_GPRS_LOGIN    ""    // replace with your GPRS login
 #define SECRET_GPRS_PASSWORD "" // replace with your GPRS password
+#define SECRET_REST_SERVER "your.server.net" 
+#define SECRET_REST_ENDPOINT "/your/endpoint"

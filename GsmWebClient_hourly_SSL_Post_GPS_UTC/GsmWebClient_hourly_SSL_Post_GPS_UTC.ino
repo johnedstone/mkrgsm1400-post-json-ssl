@@ -18,6 +18,8 @@ const char PINNUMBER[]     = SECRET_PINNUMBER;
 const char GPRS_APN[]      = SECRET_GPRS_APN;
 const char GPRS_LOGIN[]    = SECRET_GPRS_LOGIN;
 const char GPRS_PASSWORD[] = SECRET_GPRS_PASSWORD;
+const char REST_SERVER[]   = SECRET_REST_SERVER;
+const char REST_ENDPOINT[] = SECRET_REST_ENDPOINT;
 
 int port = 443;
 
