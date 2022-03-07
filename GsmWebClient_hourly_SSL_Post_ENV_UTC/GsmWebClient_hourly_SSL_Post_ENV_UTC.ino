@@ -13,6 +13,7 @@
 #include "arduino_secrets.h" 
 
 #include <Arduino_MKRGPS.h>
+#include <Arduino_MKRENV.h>
 
 const char PINNUMBER[]     = SECRET_PINNUMBER;
 const char GPRS_APN[]      = SECRET_GPRS_APN;
