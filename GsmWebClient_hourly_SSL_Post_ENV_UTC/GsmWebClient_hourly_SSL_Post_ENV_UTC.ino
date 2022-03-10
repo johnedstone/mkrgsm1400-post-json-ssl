@@ -3,7 +3,7 @@
  * Arduino MKR GSM 1400
  * Antenna
  * SIM: Hologram
- * Arduino MKR GPS (optional: set gps_timeout = 0 if not using)
+ * Arduino MKR ENV Shield rev2  (optional: set gps_timeout = 0 if not using)
  * Based on GsmWebClient_hourly_SSL_Post_GPS_UTC
 */
 
