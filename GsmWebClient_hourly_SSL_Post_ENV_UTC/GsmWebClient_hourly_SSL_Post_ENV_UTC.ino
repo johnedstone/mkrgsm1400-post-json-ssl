@@ -12,7 +12,6 @@
 #include <ArduinoJson.h>
 #include "arduino_secrets.h" 
 
-#include <Arduino_MKRGPS.h>
 #include <Arduino_MKRENV.h>
 
 const char PINNUMBER[]     = SECRET_PINNUMBER;
@@ -25,76 +24,54 @@ const char path[]          = REST_ENDPOINT;
 int port = 443;
 
 // Note: 3600000 is 1 hour.  Currently sleeping 1 hour-27 sec
-int sleeping_ms = 3561000;
-//int sleeping_ms = 180000; // 3 min
+//int sleeping_ms = 3561000;
+int sleeping_ms = 180000; // 3 min
 
 /*
  * 6000000 is approx 8.5 sec
  * 90000000 is approx 2 min
- * Set to 0 if no GPS shield
+ * Set to 0 if no ENV shield
  */
-int gps_timeout = 0;
+int env_timeout = 90000000;
 
 String IMEI = "";
 int start_time = 0;
 String msg = "Start time (unixtime / utc_datetime): ";
 
-struct GPSInfo {
-  float latitude;
-  float longitude;
-  float altitude;
-  int   satellites;
+struct ENVInfo {
+  float temperature;
+  float humidity;
+  float pressure;
+  float illuminance;
 };
 
-GPSInfo getGPSInfo() {
-  bool connected = false;
-  GPSInfo g = {0.0, 0.0, 0.0, 0};
+ENVInfo getENVInfo() {
+  ENVInfo e = {0.0, 0.0, 0.0, 0.0};
 
-  // Let's make this "optional"
-  //while (!connected) {
-    if (GPS.begin(GPS_MODE_SHIELD)) {
-      Serial.println(F("GPS initialized"));
-      connected = true;
-      Serial.print("wait location ... ");
-    
-      bool gps_available = false;
-      int counter = 0;
-      unsigned long startMillis = millis();
+  bool env_available = false;
+  int counter = 0;
 
-      while (!gps_available) {
-        if (GPS.available()) {
-          gps_available = true;
-          unsigned long endMillis = millis();
-          Serial.print(endMillis - startMillis);
-          Serial.println(F(" ms to get GPS data"));
-          g.latitude   = GPS.latitude();
-          g.longitude  = GPS.longitude();
-          g.altitude   = GPS.altitude();
-          g.satellites = GPS.satellites();
-        } else {
-          if (counter == gps_timeout) {
-            gps_available = true;
-            Serial.println(F("GPS is unavailable"));
-            unsigned long endMillis = millis();
-            Serial.print(endMillis - startMillis);
-            Serial.println(F(" ms spent checking for GPS data"));
-            Serial.print(F("Counter: "));
-            Serial.println(counter);
-          }  
-          counter += 1;
-        }
-      }
+  while (!env_available) {
+    if (ENV.begin()) {
+      env_avaailable = true;
+      e.temerature = ENV.readTemperature();
+      e.humidity    = ENV.readHumidity();
+      e.pressure    = ENV.readPressure();
+      e.illuminance = ENV.readIlluminance();
     } else {
-      Serial.println("Failed to initialize GPS!");
+      if (counter == env_timeout ) {
+        env_avaailable = true;
+        Serial.println("Failed to initialize MKR ENV Shield!");
+      }
+      counter +=1;
     }
-  //}
+  }
 
-  GPS.end();
-  return g;
+  ENV.end();
+  return e;
 }
 
 void startModem() {
-  GPRS gprs;
   //GSM gsmAccess(true);
   GSM gsmAccess;
   GSMModem modem;
@@ -196,8 +173,9 @@ void getUTC () {
   }
 }
 
-void makeWebRequest(GPSInfo gps_info) {
+void makeWebRequest() {
   GSMSSLClient client;
+  ENVInfo e = getENVInfo();
 
   Serial.println(F("connecting to REST API ..."));
 
@@ -207,11 +185,11 @@ void makeWebRequest(GPSInfo gps_info) {
   StaticJsonDocument<200> doc;
   doc["imei_string"] = IMEI;
   doc["uptime"] = msg;
-  doc["latitude"] = gps_info.latitude;
-  doc["longitude"] = gps_info.longitude;
-  doc["altitude"] = gps_info.altitude;
   doc["start_time"] = start_time;
-
+  doc["temperature"] = e.temperature
+  doc["humidity"] = e.humidity
+  doc["pressure"] = e.pressure
+  doc["illuminance"] = e.illuminance
 
   if (client.connect(server, port)) {
     Serial.println(F("connected to REST API"));
@@ -282,8 +260,7 @@ void loop() {
   if (start_time == 0) {
       getUTC();
   }
-  GPSInfo g = getGPSInfo();
-  makeWebRequest(g);
+  makeWebRequest();
 
   Serial.print(F("Sleeping for "));
   Serial.print(sleeping_ms);
