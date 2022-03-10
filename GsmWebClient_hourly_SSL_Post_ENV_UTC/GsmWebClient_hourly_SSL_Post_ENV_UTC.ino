@@ -24,8 +24,8 @@ const char path[]          = REST_ENDPOINT;
 int port = 443;
 
 // Note: 3600000 is 1 hour.  Currently sleeping 1 hour-27 sec
-//int sleeping_ms = 3561000;
-int sleeping_ms = 180000; // 3 min
+int sleeping_ms = 3561000;
+//int sleeping_ms = 180000; // 3 min
 
 /*
  * 6000000 is approx 8.5 sec
@@ -53,14 +53,14 @@ ENVInfo getENVInfo() {
 
   while (!env_available) {
     if (ENV.begin()) {
-      env_avaailable = true;
-      e.temerature = ENV.readTemperature();
+      env_available = true;
+      e.temperature = ENV.readTemperature();
       e.humidity    = ENV.readHumidity();
       e.pressure    = ENV.readPressure();
       e.illuminance = ENV.readIlluminance();
     } else {
       if (counter == env_timeout ) {
-        env_avaailable = true;
+        env_available = true;
         Serial.println("Failed to initialize MKR ENV Shield!");
       }
       counter +=1;
@@ -72,6 +72,7 @@ ENVInfo getENVInfo() {
 }
 
 void startModem() {
+  GPRS gprs;
   //GSM gsmAccess(true);
   GSM gsmAccess;
   GSMModem modem;
@@ -182,14 +183,14 @@ void makeWebRequest() {
   // https://arduinojson.org/v6/example/http-server/ (for sending json)
   // Allocate a temporary JsonDocument
   // One could use arduinojson.org/v6/assistant to compute the capacity.
-  StaticJsonDocument<200> doc;
+  StaticJsonDocument<400> doc;
   doc["imei_string"] = IMEI;
   doc["uptime"] = msg;
   doc["start_time"] = start_time;
-  doc["temperature"] = e.temperature
-  doc["humidity"] = e.humidity
-  doc["pressure"] = e.pressure
-  doc["illuminance"] = e.illuminance
+  doc["temperature"] = e.temperature;
+  doc["humidity"] = e.humidity;
+  doc["pressure"] = e.pressure;
+  doc["illuminance"] = e.illuminance;
 
   if (client.connect(server, port)) {
     Serial.println(F("connected to REST API"));
@@ -212,7 +213,7 @@ void makeWebRequest() {
 
     // Send body
     serializeJsonPretty(doc, client);
-    // serializeJsonPretty(doc, Serial);
+    serializeJsonPretty(doc, Serial); // for debugging
 
     // pause waiting for response
     // delay(750);
