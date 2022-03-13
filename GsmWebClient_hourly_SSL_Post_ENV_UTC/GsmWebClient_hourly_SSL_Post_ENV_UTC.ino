@@ -24,8 +24,9 @@ const char path[]          = REST_ENDPOINT;
 int port = 443;
 
 // Note: 3600000 is 1 hour.  Currently sleeping 1 hour-27 sec
-int sleeping_ms = 3561000;
+// int sleeping_ms = 3561000; // 1 hour
 //int sleeping_ms = 180000; // 3 min
+int sleeping_ms = 870000; // 15 min = 900000
 
 /*
  * 6000000 is approx 8.5 sec
