@@ -27,6 +27,8 @@ int port = 443;
 int sleeping_ms = 3561000;
 //int sleeping_ms = 180000; // 3 min
 
+bool disconnect_GPRS_during_interval = true;
+
 /*
  * 6000000 is approx 8.5 sec
  * 90000000 is approx 2 min
@@ -289,7 +291,10 @@ void loop() {
   }
   GPSInfo g = getGPSInfo();
   makeWebRequest(g);
-  detach_GPRS(gprs);
+
+  if (disconnect_GPRS_during_interval) {
+    detach_GPRS(gprs);
+  }
 
   Serial.print(F("Sleeping for "));
   Serial.print(sleeping_ms);
