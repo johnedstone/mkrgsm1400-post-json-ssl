@@ -27,6 +27,11 @@ int port = 443;
 int sleeping_ms = 3561000;
 //int sleeping_ms = 180000; // 3 min
 
+/*
+ * This does not appear to reduce data, at most 5mA
+ * And possibly, this disconnect adds 2KB more data per session for some reason
+ */
+
 bool disconnect_GPRS_during_interval = true;
 
 /*
