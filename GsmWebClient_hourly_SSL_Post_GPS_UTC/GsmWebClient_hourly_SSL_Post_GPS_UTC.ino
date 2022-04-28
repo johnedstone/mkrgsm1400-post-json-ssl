@@ -29,7 +29,7 @@ int sleeping_ms = 3561000;
 
 /*
  * Setting the option to disconnect GPRS does not reduce the 
- * power consumption nor reduce the data usage.
+ * power consumption nor reduce the data usage actually.
  */
 bool disconnect_GPRS_during_interval = true;
 
