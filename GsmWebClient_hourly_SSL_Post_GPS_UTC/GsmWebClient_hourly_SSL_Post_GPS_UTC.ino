@@ -92,7 +92,7 @@ GPSInfo getGPSInfo() {
   return g;
 }
 
-void startModem() {
+GPRS startModem() {
   GPRS gprs;
   //GSM gsmAccess(true);
   GSM gsmAccess;
@@ -121,6 +121,8 @@ void startModem() {
       delay(1000);
     }
   }
+
+  return gprs;
 }
 
 void getUTC () {
@@ -276,13 +278,18 @@ void setup() {
   Serial.println(F("Sketch: GsmWebClient_hourly_SSL_Post_GPS_UTC"));
 }
 
+void detach_GPRS(GPRS gprs) {
+    gprs.detachGPRS();
+}
+
 void loop() {
-  startModem();
+  GPRS gprs = startModem();
   if (start_time == 0) {
       getUTC();
   }
   GPSInfo g = getGPSInfo();
   makeWebRequest(g);
+  detach_GPRS(gprs);
 
   Serial.print(F("Sleeping for "));
   Serial.print(sleeping_ms);
