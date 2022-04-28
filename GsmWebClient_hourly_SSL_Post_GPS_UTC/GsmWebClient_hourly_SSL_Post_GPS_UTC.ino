@@ -28,10 +28,9 @@ int sleeping_ms = 3561000;
 //int sleeping_ms = 180000; // 3 min
 
 /*
- * This does not appear to reduce data, at most 5mA
- * And possibly, this disconnect adds 2KB more data per session for some reason
+ * Setting the option to disconnect GPRS does not reduce the 
+ * power consumption nor reduce the data usage.
  */
-
 bool disconnect_GPRS_during_interval = true;
 
 /*
