@@ -9,10 +9,22 @@
 * For related sketches see
     * [MKR NB 1500](https://github.com/johnedstone/MKR-NB-1500-sketches)
     * [GPy Pycom.io](https://github.com/johnedstone/pycom-gpy)
+
 * __Comment out SSL cert validation in the library as detailed below__
+Either of the following changes can be made:
+
+#### Method #1
 ```
 #file: libraries/MKRGSM/src/GSMClient.cpp
 124     case CLIENT_STATE_MANAGE_SSL_PROFILE: {
 125       // MODEM.sendf("AT+USECPRF=0,0,%d",_sslprofile);
 126       MODEM.sendf("AT+USECPRF=0");
 ```
+
+#### Method #2
+```
+#file: libraries/MKRGSM/src/GSMClient.cpp
+54   //_sslprofile(1),
+55   _sslprofile(0),
+```
+
