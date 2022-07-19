@@ -26,30 +26,41 @@ SoftwareSerial SIM900(7, 8);
 
 void setup() {
   Serial.begin(9600);
-  delay(10);
+  delay(4000);
+  ShowSerialData();
+  
+  Serial.println(F("Goodnight moon!"));
+  Serial.println(F("Sketch: sim900_https_get_version_04"));
+  Serial.print(F("The loop will sleep (ms): "));
+  Serial.print(sleeping_ms);
+  Serial.println(F(" when it is finished."));
+  Serial.println(F(""));
+  Serial.println(F("Sleeping 10 sec now, waiting for things to settle down"));
+  Serial.println(F(""));
+  delay(10000);
 
   // !!!!!!!!!!!
   // Set your reset, enable, power pins here
   // !!!!!!!!!!!
+
+  Serial.println(F("Power should be on now, waiting 10 sec, again, for things to settle down"));
+  Serial.println(F(""));
+  delay(10000);
+  ShowSerialData();
   
+  Serial.println(F("Software Serial has now beginning, waiting 10 sec, again, for things to settle down"));
+  Serial.println(F(""));
   SIM900.begin(9600);
-  delay(6000);
-
-  ShowSerialData(); // hoping to catch TZ information, to avoid garbage output (?)
-  
-  Serial.println(F("Goodnight moon!"));
-  Serial.println(F("Sketch: sim900_https_get_version_04"));
-  Serial.print(F("Sleeping (ms): "));
-  Serial.println(sleeping_ms);
-
-  ShowSerialData(); // hoping to catch TZ information, to avoid garbage output (?)
+  delay(10000);
+  ShowSerialData();
 
   SIM900.println("ATE");
   SIM900.flush();
-  delay(1000);
+  delay(2000);
   ShowSerialData();
   
   delay(2000);
+  Serial.println(F("Setup is finished. Entering the loop."));
 }
 
 void loop() {
