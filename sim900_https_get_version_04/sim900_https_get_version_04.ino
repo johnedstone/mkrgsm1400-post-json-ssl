@@ -119,10 +119,11 @@ void connectGPRS() {
 
   SIM900.println("AT+SAPBR=1,1"); // Enable GPRS, Occassionally OK, but mostly "+CME ERROR: operation not allowed"
   SIM900.flush();
-  delay(4000);
+  delay(6000);
   ShowSerialData();
   
   delay(2000);
+  Serial.println(F("If the following does not return an IP address, yikes! Resert the device!"));
   SIM900.println("AT+SAPBR=2,1"); // Query the connection, if IP, then proceed :)
   SIM900.flush();
   delay(4000);
