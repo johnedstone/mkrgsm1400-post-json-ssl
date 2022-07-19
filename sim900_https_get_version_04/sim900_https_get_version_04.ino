@@ -28,7 +28,7 @@ void setup() {
   Serial.begin(9600);
   delay(4000);
   ShowSerialData();
-  
+
   Serial.println(F("Goodnight moon!"));
   Serial.println(F("Sketch: sim900_https_get_version_04"));
   Serial.print(F("The loop will sleep (ms): "));
@@ -47,7 +47,7 @@ void setup() {
   Serial.println(F(""));
   delay(10000);
   ShowSerialData();
-  
+
   Serial.println(F("Software Serial has now beginning, waiting 10 sec, again, for things to settle down"));
   Serial.println(F(""));
   SIM900.begin(9600);
