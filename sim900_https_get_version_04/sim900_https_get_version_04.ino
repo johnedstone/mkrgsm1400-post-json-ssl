@@ -48,10 +48,6 @@ void setup() {
   SIM900.flush();
   delay(1000);
   ShowSerialData();
-
-  /*
-   * Put power on/off lines here, if needed
-   */
   
   delay(2000);
 }
