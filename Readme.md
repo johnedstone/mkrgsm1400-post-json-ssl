@@ -3,6 +3,8 @@
 * Currently using
     * GsmWebClient_hourly_SSL_Post_GPS_UTC with Arduino MKR GPS
     * GsmWebClient_hourly_SSL_Post_ENV_UTC with Arduino MKR ENV Shield rev2 
+    * *Bonus*: Adding an SSL/https GET sketch for a SIM900 `sim900_https_get_version_04`
+    (Soon to follow will be a JSON POST for SIM900).
 
 * For more history, and earlier scripts see [archive/Readme.md](archive)
 * Can be powered with the PC USB or a 5 volt charger, e.g. Raspberry Pi power supply (either 5.1 Volts/3.5 Amps or 5.0 volts/2.5 amps)
